@@ -23,3 +23,9 @@ target_link_libraries(fwrappertest
         boost_system
         boost_filesystem
         )
+
+add_test(
+        NAME test
+        COMMAND $<TARGET_FILE:fwrappertest> --gtest_output=xml:test_result.xml
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+)

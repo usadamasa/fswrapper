@@ -27,6 +27,11 @@ build: cmake
 	cd $(OUT) \
 		&& $(MAKE) CONFIG=$(CONFIG)
 
+.PHONY: test
+test: build
+	cd $(OUT) \
+		&& ctest --verbose
+
 .PHONY: clean
 clean:
 	rm -rf $(OUT)
