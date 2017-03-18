@@ -12,8 +12,8 @@ make up
 
 ## todo
 
-- [] create CMakeList.txt
-- [] Scan the directory with **range-based for**.
+- [x] create CMakeList.txt
+- [x] Scan the directory with **range-based for**.
 - [] Filter files with regex.
 - [] Reading text file with Iterator.
 - [] ctor by read csv,tsv,and more..., with template.

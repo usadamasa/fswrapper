@@ -35,7 +35,6 @@ RUN cd boost_${BOOST_VERSION} \
 
 ENV TERM=xterm
 
-ENV HOME=/usr/src/app
-WORKDIR ${HOME}
+WORKDIR /usr/src/app
 
 CMD ["tail", "-f", "/dev/null"]

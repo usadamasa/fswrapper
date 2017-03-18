@@ -1,5 +1,6 @@
 CONFIG=debug
-OUT=cmake-build-$(CONFIG)
+CMAKELISTDIR=$(CURDIR)
+OUT=build/$(CONFIG)
 
 all: build
 
@@ -16,10 +17,10 @@ shell: up
 	docker-compose exec --user=`id -u`:`id -g` develop "bash"
 
 .PHONY: cmake
-cmake: up
+cmake:
 	mkdir -p $(OUT) 	\
 		&& cd $(OUT) 	\
-		&& cmake ../
+		&& cmake $(CMAKELISTDIR)
 
 .PHONY: build
 build: cmake
