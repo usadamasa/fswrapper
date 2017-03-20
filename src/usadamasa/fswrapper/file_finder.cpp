@@ -101,6 +101,8 @@ FileFinder::FindRegularFile(const std::string &basename, bool recursive) const {
                    return p.path().string();
                  });
   list.shrink_to_fit();
+
+  std::sort(list.begin(), list.end());
   return list;
 }
 
