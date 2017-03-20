@@ -21,6 +21,11 @@ TEST(FileFinderTest, FindBasenameRecursive){
   ASSERT_THAT(list, Contains("test/data/IAMDIRECTORY/IAMREGULARFILE"));
 }
 
+TEST(FileFinderTest, UseRegex) {
+  const auto list = ufs::FileFinder("test/data").FindRegularFile("F\\d{8}.txt", true);
+  ASSERT_EQ(3, list.size());
+}
+
 TEST(FileFinderTest, NotDirectory) {
   ASSERT_THROW(ufs::FileFinder("42"), std::runtime_error);
   ASSERT_THROW(ufs::FileFinder("CMakeLists.txt"), std::runtime_error);

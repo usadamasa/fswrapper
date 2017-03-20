@@ -22,6 +22,7 @@ target_link_libraries(fwrappertest
         dl
         boost_system
         boost_filesystem
+        boost_regex
         )
 
 add_test(
