@@ -18,7 +18,7 @@ class FileFinder {
   FileFinder(const std::string &basedir = ".");
   ~FileFinder() {}
 
-  std::vector<std::string> FindRegularFile(const std::string &basename, bool recursive = false) const;
+  std::vector<std::string> FindRegularFiles(const std::string &basename, bool recursive = false) const;
 
  private:
   const std::string basedirname_;

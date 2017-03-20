@@ -9,20 +9,20 @@ using ::testing::StrEq;
 namespace ufs = usadamasa::fswrapper;
 
 TEST(FileFinderTest, FindBasenamae) {
-  const auto list = ufs::FileFinder("test/data/IAMDIRECTORY").FindRegularFile("IAMREGULARFILE");
+  const auto list = ufs::FileFinder("test/data/IAMDIRECTORY").FindRegularFiles("IAMREGULARFILE");
   ASSERT_EQ(1, list.size());
   ASSERT_THAT(list, Contains("test/data/IAMDIRECTORY/IAMREGULARFILE"));
 }
 
 TEST(FileFinderTest, FindBasenameRecursive){
-  const auto list = ufs::FileFinder("test/data").FindRegularFile("IAMREGULARFILE", true);
+  const auto list = ufs::FileFinder("test/data").FindRegularFiles("IAMREGULARFILE", true);
   ASSERT_EQ(2, list.size());
   ASSERT_THAT(list, Contains("test/data/IAMREGULARFILE/IAMREGULARFILE"));
   ASSERT_THAT(list, Contains("test/data/IAMDIRECTORY/IAMREGULARFILE"));
 }
 
 TEST(FileFinderTest, UseRegex) {
-  const auto list = ufs::FileFinder("test/data").FindRegularFile("F\\d{8}.txt", true);
+  const auto list = ufs::FileFinder("test/data").FindRegularFiles("F\\d{8}.txt", true);
   ASSERT_EQ(3, list.size());
 }
 

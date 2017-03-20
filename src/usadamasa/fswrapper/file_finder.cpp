@@ -4,10 +4,6 @@
 
 #include "file_finder.h"
 
-#include <functional>
-#include <iostream>
-#include <sstream>
-
 #include <boost/foreach.hpp>
 #include <boost/regex.hpp>
 
@@ -50,22 +46,22 @@ std::vector<T> Filter(const Range &range, const std::string &filename) {
   };
 
   using fs_filter = std::function<bool(const T &)>;
-  const std::vector<fs_filter> filters = {is_regular_file, is_match_basename};
+  const fs_filter filters[] = {is_regular_file, is_match_basename};
 
   // to get list size, copying range.
   const auto temp(range);
-  std::vector<T> plist;
-  plist.reserve(std::distance(temp.begin(), temp.end()));
+  std::vector<T> path_list;
+  path_list.reserve(std::distance(temp.begin(), temp.end()));
 
-  std::copy_if(range.begin(), range.end(), std::back_inserter(plist),
+  std::copy_if(range.begin(), range.end(), std::back_inserter(path_list),
                [&filters](const T &e) {
                  return std::all_of(
-                     filters.begin(), filters.end(),
+                     std::begin(filters), std::end(filters),
                      [&e](const fs_filter &f) { return f(e); });
                });
 
-  plist.shrink_to_fit();
-  return plist;
+  path_list.shrink_to_fit();
+  return path_list;
 }
 }
 
@@ -83,7 +79,7 @@ FileFinder::FileFinder(const std::string &basedir)
 }
 
 std::vector<std::string>
-FileFinder::FindRegularFile(const std::string &basename, bool recursive) const {
+FileFinder::FindRegularFiles(const std::string &basename, bool recursive) const {
 
   std::vector<bfs::directory_entry> plist;
   if (recursive) {
@@ -105,6 +101,7 @@ FileFinder::FindRegularFile(const std::string &basename, bool recursive) const {
   std::sort(list.begin(), list.end());
   return list;
 }
+
 
 } // namespace fswrapper
 } // namespace usadamasa
